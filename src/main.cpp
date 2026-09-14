@@ -55,6 +55,48 @@ int main()
                 std::cout << "  read    Read GPIO pin state\n";
                 std::cout << "  help    Display this help message\n\n";
             }
+            else if(tokens[1] == "mode" || tokens[1] == "Mode" || tokens[1] == "MODE")
+            {
+                if(tokens.size() == 2)
+                {
+                    std::cout << "ERROR: Missing GPIO pin\n";
+                }
+                else if(tokens.size() == 3)
+                {
+                    std::cout << "ERROR: Missing GPIO mode\n";
+                }
+                else if(tokens.size() == 4)
+                {
+                    try
+                    {
+                        PinMode mode;
+                        int pin = std::stoi(tokens[2]);
+
+                        if(tokens[3] == "output" || tokens[3] == "OUTPUT")
+                        {
+                            mode = OUTPUT;
+                            system.getGPIO().setMode(pin,mode);
+                        }
+                        else if(tokens[3] == "input" || tokens[3] == "INPUT")
+                        {
+                            mode = INPUT;
+                            system.getGPIO().setMode(pin,mode);
+                        }
+                        else
+                        {
+                            std::cout << "ERROR: Invalid GPIO mode\n";
+                        }
+                    }
+                    catch(const std::invalid_argument&)
+                    {
+                        std::cout << "ERROR: Invalid GPIO pin\n";
+                    }
+                }
+                else if(tokens.size() > 4)
+                {
+                    std::cout << "ERROR: Too many arguments\n";
+                }
+            }
             else
             {
                 std::cout << "ERROR: Unknown GPIO subcommand\n";
