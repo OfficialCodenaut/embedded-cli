@@ -15,12 +15,20 @@ int main()
         std::cout << "embedded> ";
         std::getline(std::cin, command);
 
-        std::cout << "You entered: " << command << '\n';
-
         if(command == "exit" || command == "Exit" || command == "EXIT")
         {
-            std::cout << "\nExiting EMBEDDED SYSYTEM CLI...\n";
+            std::cout << "\nExiting Embedded System CLI...\n";
             break;
+        }
+        else if(command == "help" || command == "Help" || command == "HELP")
+        {
+            std::cout << "\nAvailable commands:\n";
+            std::cout << "  help    Display this help message\n";
+            std::cout << "  exit    Exit Embedded System CLI\n\n";
+        }
+        else
+        {
+            std::cout << "ERROR: Unknown command\n";
         }
     }
 
