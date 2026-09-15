@@ -287,7 +287,28 @@ int main()
                 std::cout << "  send    Send message through UART\n";
                 std::cout << "  status  Display UART status\n";
                 std::cout << "  help    Display this help message\n\n";
-            }            
+            }
+            
+            // Subcommand: status
+            else if(tokens[1] == "status" || tokens[1] == "Status" || tokens[1] == "STATUS")
+            {
+                UARTState state = system.getUART().status();
+
+                switch(state)
+                {
+                    case UNINITIALIZED:
+                    std::cout << "UART = UNINITIALIZED\n";
+                    break;
+
+                    case READY:
+                    std::cout << "UART = READY\n";
+                    break;
+
+                    default:
+                    std::cout << "ERROR: UART status not recognized\n";
+                    break;
+                }
+            }
         }
         else
         {
