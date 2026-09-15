@@ -30,23 +30,30 @@ int main()
             continue;
         }
 
+        // Command: exit
         if(tokens[0] == "exit" || tokens[0] == "Exit" || tokens[0] == "EXIT")
         {
             std::cout << "\nExiting Embedded System CLI...\n";
             break;
         }
+
+        // Command: help
         else if(tokens[0] == "help" || tokens[0] == "Help" || tokens[0] == "HELP")
         {
             std::cout << "\nAvailable commands:\n";
             std::cout << "  help    Display this help message\n";
             std::cout << "  exit    Exit Embedded System CLI\n\n";
         }
+
+        // Module: GPIO
         else if(tokens[0] == "gpio" || tokens[0] == "GPIO")
         {
             if(tokens.size() == 1)
             {
                 std::cout << "ERROR: Missing GPIO subcommand\n";
             }
+
+            // Subcommand: help
             else if(tokens[1] == "help" || tokens[1] == "Help" || tokens[1] == "HELP")
             {
                 std::cout << "\nGPIO commands:\n";
@@ -55,6 +62,8 @@ int main()
                 std::cout << "  read    Read GPIO pin state\n";
                 std::cout << "  help    Display this help message\n\n";
             }
+
+            // Subcommand: mode
             else if(tokens[1] == "mode" || tokens[1] == "Mode" || tokens[1] == "MODE")
             {
                 if(tokens.size() == 2)
@@ -97,6 +106,8 @@ int main()
                     std::cout << "ERROR: Too many arguments\n";
                 }
             }
+
+            // Subcommand: write
             else if(tokens[1] == "write" || tokens[1] == "Write" || tokens[1] == "WRITE")
             {
                 if(tokens.size() == 2)
@@ -139,7 +150,8 @@ int main()
                     std::cout << "ERROR: Too many arguments\n";
                 }
             }
-            //gpio read
+
+            // Subcommand: read
             else if(tokens[1] == "read" || tokens[1] == "Read" || tokens[1] == "READ")
             {
                 if(tokens.size() == 2)
