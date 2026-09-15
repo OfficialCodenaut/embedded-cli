@@ -226,6 +226,45 @@ int main()
                 }
             }
 
+            // Subcommand: set
+            else if(tokens[1] == "set" || tokens[1] == "Set" || tokens[1] == "SET")
+            {
+                if(tokens.size() == 2)
+                {
+                    std::cout << "ERROR: Missing ADC channel\n";
+                }
+                else if(tokens.size() == 3)
+                {
+                    std::cout << "ERROR: Missing ADC value\n";
+                }
+                else if(tokens.size() == 4)
+                {
+                    try
+                    {
+                        int channel = std::stoi(tokens[2]);
+                        
+                        try
+                        {
+                            int value = std::stoi(tokens[3]);
+
+                            system.getADC().setValue(channel, value);
+                        }
+                        catch(const std::invalid_argument&)
+                        {
+                            std::cout << "ERROR: Invalid ADC value\n";
+                        }
+                    }
+                    catch(const std::invalid_argument&)
+                    {
+                        std::cout << "ERROR: Invalid ADC channel\n";
+                    }
+                }
+                else if(tokens.size() > 4)
+                {
+                    std::cout << "ERROR: Too many arguments\n";
+                }
+            }
+
             else
             {
                 std::cout << "ERROR: Unknown ADC subcommand\n";
