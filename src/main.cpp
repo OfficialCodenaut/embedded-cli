@@ -176,9 +176,59 @@ int main()
                     std::cout << "ERROR: Too many arguments\n";
                 }
             }
+
             else
             {
                 std::cout << "ERROR: Unknown GPIO subcommand\n";
+            }
+        }
+
+        // Module: ADC
+        else if(tokens[0] == "adc" || tokens[0] == "ADC")
+        {
+            if(tokens.size() == 1)
+            {
+                std::cout << "ERROR: Missing ADC subcommand\n";
+            }
+
+            // Subcommand: help
+            else if(tokens[1] == "help" || tokens[1] == "Help" || tokens[1] == "HELP")
+            {
+                std::cout << "\nADC commands:\n";
+                std::cout << "  set     Set ADC channel value\n";
+                std::cout << "  read    Read ADC channel value\n";
+                std::cout << "  help    Display this help message\n\n";
+            }
+
+            // Subcommand: read
+            else if(tokens[1] == "read" || tokens[1] == "Read" || tokens[1] == "READ")
+            {
+                if(tokens.size() == 2)
+                {
+                    std::cout << "ERROR: Missing ADC channel\n";
+                }
+                else if(tokens.size() == 3)
+                {
+                    try
+                    {
+                        int channel = std::stoi(tokens[2]);
+
+                        system.getADC().read(channel);
+                    }
+                    catch(const std::invalid_argument&)
+                    {
+                        std::cout << "ERROR: Invalid ADC channel\n";
+                    }
+                }
+                else if(tokens.size() > 3)
+                {
+                    std::cout << "ERROR: Too many arguments\n";
+                }
+            }
+
+            else
+            {
+                std::cout << "ERROR: Unknown ADC subcommand\n";
             }
         }
         else
