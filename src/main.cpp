@@ -270,6 +270,25 @@ int main()
                 std::cout << "ERROR: Unknown ADC subcommand\n";
             }
         }
+
+        // Module: UART
+        else if(tokens[0] == "uart" || tokens[0] == "UART")
+        {
+            if(tokens.size() == 1)
+            {
+                std::cout << "ERROR: Missing ADC subcommand\n";
+            }
+
+            // Subcommand: help
+            else if(tokens[1] == "help" || tokens[1] == "Help" || tokens[1] == "HELP")
+            {
+                std::cout << "\nUART commands:\n";
+                std::cout << "  begin   Initialize UART\n";
+                std::cout << "  send    Send message through UART\n";
+                std::cout << "  status  Display UART status\n";
+                std::cout << "  help    Display this help message\n\n";
+            }            
+        }
         else
         {
             std::cout << "ERROR: Unknown command\n";
