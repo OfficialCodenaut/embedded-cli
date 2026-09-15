@@ -97,7 +97,6 @@ int main()
                     std::cout << "ERROR: Too many arguments\n";
                 }
             }
-            //gpio write section
             else if(tokens[1] == "write" || tokens[1] == "Write" || tokens[1] == "WRITE")
             {
                 if(tokens.size() == 2)
@@ -136,6 +135,31 @@ int main()
                     }
                 }
                 else if(tokens.size() > 4)
+                {
+                    std::cout << "ERROR: Too many arguments\n";
+                }
+            }
+            //gpio read
+            else if(tokens[1] == "read" || tokens[1] == "Read" || tokens[1] == "READ")
+            {
+                if(tokens.size() == 2)
+                {
+                    std::cout << "ERROR: Missing GPIO pin\n";
+                }
+                else if(tokens.size() == 3)
+                {
+                    try
+                    {
+                        int pin = std::stoi(tokens[2]);
+
+                        system.getGPIO().read(pin);
+                    }
+                    catch(const std::invalid_argument&)
+                    {
+                        std::cout << "ERROR: Invalid GPIO pin\n";
+                    }
+                }
+                else if(tokens.size() > 3)
                 {
                     std::cout << "ERROR: Too many arguments\n";
                 }
