@@ -276,7 +276,7 @@ int main()
         {
             if(tokens.size() == 1)
             {
-                std::cout << "ERROR: Missing ADC subcommand\n";
+                std::cout << "ERROR: Missing UART subcommand\n";
             }
 
             // Subcommand: help
@@ -307,6 +307,32 @@ int main()
                     default:
                     std::cout << "ERROR: UART status not recognized\n";
                     break;
+                }
+            }
+
+            // Subcommand: begin
+            else if(tokens[1] == "begin" || tokens[1] == "Begin" || tokens[1] == "BEGIN")
+            {
+                if(tokens.size() == 2)
+                {
+                    std::cout << "ERROR: Missing UART baud rate\n";
+                }
+                else if(tokens.size() == 3)
+                {
+                    try
+                    {
+                        int baudRate = std::stoi(tokens[2]);
+
+                        system.getUART().begin(baudRate);
+                    }
+                    catch(const std::invalid_argument&)
+                    {
+                        std::cout << "ERROR: Invalid UART baud rate\n";
+                    }
+                }
+                else if(tokens.size() > 3)
+                {
+                    std::cout << "ERROR: Too many arguments\n";
                 }
             }
         }
