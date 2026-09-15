@@ -97,6 +97,49 @@ int main()
                     std::cout << "ERROR: Too many arguments\n";
                 }
             }
+            //gpio write section
+            else if(tokens[1] == "write" || tokens[1] == "Write" || tokens[1] == "WRITE")
+            {
+                if(tokens.size() == 2)
+                {
+                    std::cout << "ERROR: Missing GPIO pin\n";
+                }
+                else if(tokens.size() == 3)
+                {
+                    std::cout << "ERROR: Missing GPIO state\n";
+                }
+                else if(tokens.size() == 4)
+                {
+                    try
+                    {
+                        PinState state;
+                        int pin = std::stoi(tokens[2]);
+
+                        if(tokens[3] == "low" || tokens[3] == "LOW")
+                        {
+                            state = LOW;
+                            system.getGPIO().write(pin,state);
+                        }
+                        else if(tokens[3] == "high" || tokens[3] == "HIGH")
+                        {
+                            state = HIGH;
+                            system.getGPIO().write(pin,state);
+                        }
+                        else
+                        {
+                            std::cout << "ERROR: Invalid GPIO state\n";
+                        }
+                    }
+                    catch(const std::invalid_argument&)
+                    {
+                        std::cout << "ERROR: Invalid GPIO pin\n";
+                    }
+                }
+                else if(tokens.size() > 4)
+                {
+                    std::cout << "ERROR: Too many arguments\n";
+                }
+            }
             else
             {
                 std::cout << "ERROR: Unknown GPIO subcommand\n";
