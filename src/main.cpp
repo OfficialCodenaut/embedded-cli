@@ -335,6 +335,33 @@ int main()
                     std::cout << "ERROR: Too many arguments\n";
                 }
             }
+
+            // Subcommand: send
+            else if(tokens[1] == "send" || tokens[1] == "Send" || tokens[1] == "SEND")
+            {
+                if(tokens.size() == 2)
+                {
+                    std::cout << "ERROR: Missing UART message\n";
+                }
+                
+                else if(tokens.size() >= 3)
+                {
+                    std::string message;
+                    for(int i = 2; i < tokens.size(); i++)
+                    {
+                        if(i != 2)
+                        {
+                            message += " " + tokens[i];
+                        }
+                        else
+                        {
+                            message += tokens[i];
+                        }
+                    }
+
+                    system.getUART().send(message);
+                }
+            }
         }
         else
         {
